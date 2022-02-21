@@ -1,0 +1,29 @@
+---
+- hosts: localhost
+  connection: local
+  gather_facts: False
+  tasks:
+    - name: default variables
+      set_fact:
+        cloudinit_fqdn: 'test.example.com'
+
+    - name: get metatdata from host_vars/<host_fqdn>.yml
+      set_fact: 
+        host_metadata="{{ lookup('file', 'host_vars/{{ cloudinit_fqdn }}') | from_yaml }}"
+
+    - name: set container metadata - additional container values
+      set_fact:
+        additional_container_config_values: "{{ host_metadata['additional_container_config_values'] }}"
+      when: host_metadata['additional_container_config_values'] is defined
+
+    - name: set container metadata - cloudinit network raw
+      set_fact:
+        cloudinit_network_raw: "{{ host_metadata['cloudinit_network_raw'] }}"
+      when: host_metadata['cloudinit_network_raw'] is defined
+
+- name: create container
+  import_playbook: 'test_server_create_container.yml'
+- name: system configuration
+  import_playbook: 'tets_server_server_config.yml'
+  # vars: "{{ hostvars['localhost'] }}"
+...

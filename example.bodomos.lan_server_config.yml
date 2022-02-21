@@ -1,0 +1,11 @@
+---
+- hosts:
+    - "{{ hostvars['localhost']['cloudinit_fqdn'] }}"
+  vars_files:
+    - group_vars/default.vault
+  vars:
+    cloudinit_fqdn: "{{ hostvars['localhost']['cloudinit_fqdn'] }}"
+  tasks:
+  roles:
+    - default_server
+...

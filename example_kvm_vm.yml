@@ -1,0 +1,14 @@
+---
+- hosts:
+   - gramophone.bodomos.lan
+  vars:
+    # ubutu cloudimages are currently (20220202) down and image broken so -> choose mirror
+    kvm_download_url: 'https://mirrors.servercentral.com/ubuntu-cloud-images'
+    kvm_dist_release_date: '20220129'
+    cloudinit_fqdn: 'test.bodomos.lan'
+    ansible_become: true
+  vars_files:
+    - group_vars/default.vault
+  tasks:
+  roles:
+    - kvm-vm 

@@ -1,0 +1,38 @@
+{
+  "subject": {
+{{- if .Insecure.User.organizationalUnit }}
+  "organizationalUnit": {{ toJson .Insecure.User.organizationalUnit }},
+{{- else }}
+  "organizationalUnit": {{ toJson .organizationalUnit }},
+{{- end }}
+{{- if .Insecure.User.organization }}
+  "organization": {{ toJson .Insecure.User.organization }},
+{{- else }}
+  "organization": {{ toJson .organization }},
+{{- end }}
+{{- if .Insecure.User.locality }}
+  "locality": {{ toJson .Insecure.User.locality }},
+{{- else }}
+  "locality": {{ toJson .locality }},
+{{- end }}
+{{- if .Insecure.User.Province }}
+  "province": {{ toJson .Insecure.User.province }},
+{{- else }}
+  "province": {{ toJson .province }},
+{{- end }}
+{{- if .Insecure.User.Country }}
+  "country": {{ toJson .Insecure.User.country }},
+{{- else }}
+  "country": {{ toJson .country }},
+{{- end }}
+  "commonName": {{ toJson .Subject.CommonName }}
+  },
+  "sans": {{ toJson .SANs }},
+{{- if typeIs "*rsa.PublicKey" .Insecure.CR.PublicKey }}
+    "keyUsage": ["keyEncipherment", "digitalSignature"],
+{{- else }}
+    "keyUsage": ["digitalSignature"],
+{{- end }}
+  "keyUsage": ["digitalSignature"],
+  "extKeyUsage": ["serverAuth", "clientAuth"]
+}

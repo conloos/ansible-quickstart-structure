@@ -1,0 +1,9 @@
+---
+# ca:
+#   tls_cert_contact: 'user@example.com'
+#   fqdn: 'test.example.com'
+#   url: https://ca.example.com
+#   fingerprint: '{{ vault_ca.fingerprint }}'
+# step_bootstrap_ca_url: "{{ ca.url }}"
+# step_bootstrap_fingerprint: "{{ ca.fingerprint }}"
+...

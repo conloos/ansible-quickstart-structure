@@ -24,6 +24,6 @@
 - name: create container
   import_playbook: 'test_server_create_container.yml'
 - name: system configuration
-  import_playbook: 'tets_server_server_config.yml'
+  import_playbook: 'test_server_server_config.yml'
   # vars: "{{ hostvars['localhost'] }}"
 ...
